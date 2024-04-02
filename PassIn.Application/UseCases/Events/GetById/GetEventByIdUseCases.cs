@@ -13,7 +13,7 @@ namespace PassIn.Application.UseCases.Events.GetById
             var entity = dbContext.Events.FirstOrDefault(ev => ev.Id == id);
 
             if (entity == null)
-                throw new PassInException("Event not found!");
+                throw new NotFoundException("Event not found!");
 
             return new ResponseEventJson
             {

@@ -7,11 +7,16 @@ namespace PassIn.Application.UseCases.Events.Register
 {
     public class RegisterEventUseCases
     {
+        private readonly PassInDbContext _dbContext;
+
+        public RegisterEventUseCases()
+        {
+            _dbContext = new PassInDbContext();
+        }
+
         public ResponseRegisteredEventJson Execute(RequestEventJson request)
         {
             Validate(request);
-
-            var dbContext = new PassInDbContext();
 
             var entity = new Infrastructure.Entities.Event
             {
@@ -21,8 +26,8 @@ namespace PassIn.Application.UseCases.Events.Register
                 Slug = request.Title.ToLower().Replace(" ", "-"),
             };
 
-            dbContext.Events.Add(entity);
-            dbContext.SaveChanges();
+            _dbContext.Events.Add(entity);
+            _dbContext.SaveChanges();
 
             return new ResponseRegisteredEventJson(entity.Id); 
         }
@@ -31,17 +36,17 @@ namespace PassIn.Application.UseCases.Events.Register
         {
             if(request.MaximumAttendees <= 0)
             {
-                throw new PassInException("The maximum Attendees is invalid.");
+                throw new ErrorOnValidationException("The maximum Attendees is invalid.");
             }
 
             if(string.IsNullOrWhiteSpace(request.Title))
             {
-                throw new PassInException("The tittle must contain value");
+                throw new ErrorOnValidationException("The tittle must contain value");
             }
 
             if (string.IsNullOrWhiteSpace(request.Details))
             {
-                throw new PassInException("The details must contain value");
+                throw new ErrorOnValidationException("The details must contain value");
             }
         }
     }
