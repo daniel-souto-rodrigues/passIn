@@ -1,0 +1,35 @@
+# Arquivos e diretórios de compilação
+bin/
+obj/
+
+# Arquivos de dependência NuGet
+*.dll
+*.exe
+*.pdb
+*.zip
+*.gz
+*.log
+*.vscode/
+*.vs/
+*.suo
+*.user
+*.cache
+*.bak
+*.swp
+*.userprefs
+*.pidb
+*.ide
+
+# Arquivos de configuração de IDEs
+.vscode/
+.idea/
+*.suo
+*.user
+*.userprefs
+
+# Arquivos temporários e de backup
+*.log
+*.cache
+*.bak
+*.swp
+*~
