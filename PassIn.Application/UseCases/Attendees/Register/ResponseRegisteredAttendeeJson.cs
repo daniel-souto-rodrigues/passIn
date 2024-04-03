@@ -1,4 +1,4 @@
-﻿namespace PassIn.Application.UseCases.Events.RegisterAttendee
+﻿namespace PassIn.Application.UseCases.Attendees.Register
 {
     public class ResponseRegisteredAttendeeJson
     {

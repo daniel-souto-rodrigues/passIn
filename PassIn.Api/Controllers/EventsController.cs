@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PassIn.Application.UseCases.Events.GetById;
 using PassIn.Application.UseCases.Events.Register;
-using PassIn.Application.UseCases.Events.RegisterAttendee;
 using PassIn.Communication.Requests;
 using PassIn.Communication.Responses;
 
@@ -31,19 +30,5 @@ public class EventsController : ControllerBase
         var response = useCase.Execute(eventId);
 
         return Ok(response);
-    }
-
-    [HttpPost("{eventId}/register")]
-    [ProducesResponseType(typeof(ResponseRegisteredAttendeeJson), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-    public IActionResult Register([FromBody] RequestRegisterEventJson request,
-        [FromRoute] Guid eventId)
-    {
-        var useCase = new RegisterAttendeesOnEventUseCase();
-
-        var response = useCase.Execute(eventId, request);
-
-        return Created(string.Empty, response);
     }
 }

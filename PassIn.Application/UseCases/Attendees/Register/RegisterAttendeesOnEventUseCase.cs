@@ -4,7 +4,7 @@ using PassIn.Exceptions;
 using PassIn.Infrastructure;
 using System.Net.Mail;
 
-namespace PassIn.Application.UseCases.Events.RegisterAttendee
+namespace PassIn.Application.UseCases.Attendees.Register
 {
     public class RegisterAttendeesOnEventUseCase
     {
@@ -55,8 +55,8 @@ namespace PassIn.Application.UseCases.Events.RegisterAttendee
                 throw new ConflictException("You cannot register in the same event twice");
 
             var attendeesCount = _dbContext.Attendees.Count(at => at.Event_Id.Equals(eventId));
-            
-            if(attendeesCount >= entityEvent.Maximum_Attendees)
+
+            if (attendeesCount >= entityEvent.Maximum_Attendees)
                 throw new TooManyRegisterException("Event is full");
         }
 
